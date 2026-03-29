@@ -17,10 +17,11 @@ export default function Login() {
                 "emailId": emailId,
                 "password": password
             }, { withCredentials: true });
-            console.log(res.data);
+            // console.log(res.data);
             dispatch(addUser(res.data));
             return navigate("/")
         } catch (err) {
+            navigate("/login")
             console.error(err.message);
         }
     }
