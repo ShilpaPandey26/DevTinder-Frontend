@@ -11,6 +11,7 @@ export default function Body() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userData = useSelector(store => store.user)
+ 
   // console.log("User Body")
 
 
@@ -23,10 +24,10 @@ export default function Body() {
        console.log("profile", res.data)
       dispatch(addUser(res.data))
     } catch (err) {
-      if (err.status === 401) {
+      if (err.status == 401) {
         navigate("/login")
       }
-      console.log(err);
+      console.log("Body fetchUser",err);
     }
   }
 
