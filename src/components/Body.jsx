@@ -14,7 +14,6 @@ export default function Body() {
  
   // console.log("User Body")
 
-
   const fetchUser = async () => {
    if (userData) return;
     try {
@@ -27,7 +26,7 @@ export default function Body() {
       if (err.status == 401) {
         navigate("/login")
       }
-      console.log("Body fetchUser",err);
+      //console.log("Body fetchUser",err);
     }
   }
 

@@ -59,7 +59,7 @@ export default function Navbar() {
               </Link>
             </li>
             {user ? (<li>
-              <Link to="/" className="justify-between">
+              <Link to="/feed" className="justify-between">
                 Feed
                 <span className="badge">New</span>
               </Link>
