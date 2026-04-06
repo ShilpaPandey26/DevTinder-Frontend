@@ -34,7 +34,7 @@ export default function Navbar() {
       </div>
       {user && <div className="flex gap-2">
         <div className="dropdown dropdown-end flex gap-5">
-          <h2 className="font-bold">Welcome {user.firstName} </h2>
+          <h2 className="font-bold">Welcome {user?.firstName} </h2>
           <div
             tabIndex={0}
             role="button"

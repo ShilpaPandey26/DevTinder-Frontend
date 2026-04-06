@@ -1,11 +1,11 @@
 import React from 'react'
 
 export default function UserCard({ user }) {
-    console.log("user", user)
+    // console.log("user", user)
     if (!user) return null;
     const { firstName, lastName, about, photoUrl, age, gender } = user
     return (
-        <div className="card bg-base-100 w-96 shadow-sm badge-outline">
+        <div className="card bg-base-300 w-96 shadow-sm badge-outline max-h-fit my-10">
             <figure>
                 <img
                     src={photoUrl}

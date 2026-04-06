@@ -10,7 +10,7 @@ export default function Feed() {
   const dispatch = useDispatch();
 
   const getFeed = async () => {
-     if (feed) return;
+    if (feed?.length > 0) return;
     try {
       const res = await axios.get(BASE_URL + "/feed", { withCredentials: true });
       dispatch(addFeed(res.data));
