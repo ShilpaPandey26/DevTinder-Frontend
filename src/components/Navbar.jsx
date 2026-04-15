@@ -58,16 +58,25 @@ export default function Navbar() {
                 <span className="badge">New</span>
               </Link>
             </li>
-            {user ? (<li>
+            <li>
+              <Link to="/connections" className="justify-between">
+                Connections
+                <span className="badge">New</span>
+              </Link>
+            </li>
+
+            <li>
+              <Link to="/requests" className="justify-between">
+                 Requests
+                <span className="badge">New</span>
+              </Link>
+            </li>
+            {/* <li>
               <Link to="/feed" className="justify-between">
                 Feed
                 <span className="badge">New</span>
               </Link>
-            </li>) : (<li><Link to="/login" className="justify-between">
-              Login
-              <span className="badge">New</span>
-            </Link>
-            </li>)}
+            </li> */}
 
 
             <li>
