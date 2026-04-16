@@ -1,19 +1,33 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { BASE_URL } from "../utils/constants"
 import { useDispatch, useSelector } from "react-redux"
-import { addRequests } from "../utils/requestSlice";
+import { addRequests, removeRequests } from "../utils/requestSlice";
 import axios from "axios";
 
 export default function Requests() {
     const dispatch = useDispatch();
     const requests = useSelector((store) => store.requests)
+    const [showBtn, setShowBtn] = useState(true)
+
+    const reviewRequest = async (status, _id) => {
+        try {
+            const res = await axios.post(
+                BASE_URL + "/request/review/" + status + "/" + _id,{},
+                { withCredentials: true }
+            );
+            dispatch(removeRequests(_id));
+            setShowBtn(false);
+        } catch (err) {
+            console.log(err.message)
+        }
+    }
 
 
     const fetchRequests = async () => {
         try {
             const res = await axios.get(
                 BASE_URL + "/user/requests/received",
-                { withCredentials: true }   
+                { withCredentials: true }
             );
             dispatch(addRequests(res.data.data))
 
@@ -27,7 +41,7 @@ export default function Requests() {
     }, [])
 
     if (!requests) return;
-    if (requests.length === 0) return <h2>No Requests Found!!</h2>
+    if (requests.length === 0) return <h2 className="font-bold text-center my-10 text-2xl">No Requests Found!!</h2>
 
     return (
         <div>
@@ -45,10 +59,10 @@ export default function Requests() {
                             {age && gender && <h2>{age + " " + gender}</h2>}
                             <p>{about}</p>
                         </div>
-                        <div className="flex gap-3">
-                            <button className="btn btn-primary">Reject</button>
-                            <button className="btn btn-secondary">Accept</button>
-                        </div>
+                       {showBtn && <div className="flex gap-3">
+                            <button className="btn btn-primary" onClick={() => reviewRequest("rejected", request._id)}>Reject</button>
+                            <button className="btn btn-secondary" onClick={() => reviewRequest("accepted", request._id)}>Accept</button>
+                        </div>}
                     </div>
                 );
             })}
