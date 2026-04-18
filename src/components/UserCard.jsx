@@ -1,9 +1,25 @@
 import React from 'react'
+import { BASE_URL } from "../utils/constants";
+import { useDispatch } from "react-redux";
+import { removeUserFromFeed } from '../utils/feedSlice';
+import axios from 'axios'
 
 export default function UserCard({ user }) {
-    // console.log("user", user)
+
     if (!user) return null;
-    const { firstName, lastName, about, photoUrl, age, gender } = user
+    const { _id, firstName, lastName, about, photoUrl, age, gender } = user;
+
+    const dispatch = useDispatch();
+
+    const handleSendRequest = async (status, userId) => {
+        try {
+            const res = await axios.post(BASE_URL + "/request/send/" + status + "/" + userId, {}, { withCredentials: true });
+            dispatch(removeUserFromFeed(userId));
+        } catch (err) {
+            console.log("UserCard Error: ", err.message)
+
+        }
+    }
     return (
         <div className="card bg-base-300 w-96 shadow-sm badge-outline max-h-fit my-10">
             <figure>
@@ -13,13 +29,13 @@ export default function UserCard({ user }) {
             </figure>
             <div className="card-body">
                 <h2 className="card-title">
-                    {firstName}
+                    {firstName + " " + lastName}
                 </h2>
                 {age && gender && <p>{age + " " + gender}</p>}
                 <p>{about}</p>
                 <div className="card-actions justify-center text-white! my-10">
-                    <div className="badge  bg-primary py-4 px-5">Ignore</div>
-                    <div className="badge bg-secondary py-4 px-5">Interested</div>
+                    <div className="badge  bg-primary py-4 px-5" onClick={() => handleSendRequest("ignored", _id)}>Ignore</div>
+                    <div className="badge bg-secondary py-4 px-5" onClick={() => handleSendRequest("interested", _id)}>Interested</div>
                 </div>
             </div>
         </div>

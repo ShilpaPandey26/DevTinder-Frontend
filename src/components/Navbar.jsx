@@ -71,12 +71,12 @@ export default function Navbar() {
                 <span className="badge">New</span>
               </Link>
             </li>
-            {/* <li>
+            <li>
               <Link to="/feed" className="justify-between">
                 Feed
                 <span className="badge">New</span>
               </Link>
-            </li> */}
+            </li>
 
 
             <li>

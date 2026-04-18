@@ -11,12 +11,13 @@ export default function Feed() {
 
   const getFeed = async () => {
     if (feed?.length > 0) return;
+    //  if (feed) return;
     try {
       const res = await axios.get(BASE_URL + "/feed", { withCredentials: true });
-      dispatch(addFeed(res.data));
+      dispatch(addFeed(res?.data));
       // console.log(res.data)
     } catch (err) {
-      // console.log(err);
+      console.log("Feed ERROR: ",err);
     }
   }
 
@@ -24,6 +25,9 @@ export default function Feed() {
     getFeed();
 
   }, [])
+
+  if(!feed) return ;
+  if(feed.length <= 0) return <h2 className='flex justify-center my-10'>No new Users Found!! </h2>
 
   return (
     feed && (
