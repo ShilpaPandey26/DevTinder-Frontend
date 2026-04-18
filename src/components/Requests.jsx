@@ -18,7 +18,7 @@ export default function Requests() {
             dispatch(removeRequests(_id));
             setShowBtn(false);
         } catch (err) {
-            console.log(err.message)
+            console.log("REQUEST ERROR: ",err.message)
         }
     }
 

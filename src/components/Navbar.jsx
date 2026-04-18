@@ -26,6 +26,7 @@ export default function Navbar() {
       // console.log("logout Navbar", err);
     }
   }
+  
 
   return (
     <div className="navbar bg-base-300 shadow-sm">
@@ -34,7 +35,7 @@ export default function Navbar() {
       </div>
       {user && <div className="flex gap-2">
         <div className="dropdown dropdown-end flex gap-5">
-          <h2 className="font-bold">Welcome {user?.firstName} </h2>
+          <h2 className="font-bold">Welcome {user?.firstName || "Dummy"} </h2>
           <div
             tabIndex={0}
             role="button"
@@ -44,7 +45,7 @@ export default function Navbar() {
             <div className="w-10 rounded-full">
               <img
                 alt="Tailwind CSS Navbar component"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                src={user?.photoUrl || "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"}
               />
             </div>
           </div>
